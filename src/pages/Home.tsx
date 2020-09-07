@@ -1,49 +1,55 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg } from '@ionic/react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import cards from '../models/cards';
+
+
+
 
 
 const Home: React.FC = () => {
 
+  const [posts,setPost]=useState<cards[]>([]);
+
+ 
   
-  const [title, setTitle] = useState<string>();
-  const [desc, setDesc] = useState<string>();
-  const [url, seturl] = useState<string>();
+
+  
+  const [titleinp, setTitle] = useState<string>();
+  const [descinp, setDesc] = useState<string>();
+  const [urlinp, seturl] = useState<string>();
+  const [commentinp, setcomment] = useState<string>();
+  
+
   
 
    function addCard(){
     console.log("im working");
   
-    const cardsSlot= document.getElementById("cards");
 
-    const cardElement= document.createElement('Ion-card');
+   const card : cards = {
+     id:1,
+     title:titleinp,
+     description:descinp,
+     imgurl:urlinp,
 
-    console.log(title,url,desc);
 
-
-
-    cardElement.innerHTML= `<Ion-Card>
-    <img src=${url} alt=''/>
-    <Ion-Card-Header>
+  }
     
-      <Ion-Card-Subtitle></Ion-Card-Subtitle>
-      <Ion-Card-Title>${title}</Ion-Card-Title>
-    </Ion-Card-Header>
-
-    <Ion-Card-Content>
-    ${desc}
-</Ion-Card-Content>
-  </Ion-Card>`
-  ;
-    cardsSlot?.appendChild(cardElement);
-
+    
+              
+       posts?.push(card);        
+           console.log(posts);
+       for (const post in posts){ console.log(post)}
+   
     setTitle('');
     setDesc('');
-    seturl('')
-
+    seturl('');
+    setcomment('');
+    
    };
 
 
-   
 
   return (
     <IonPage color="primary">
@@ -56,28 +62,49 @@ const Home: React.FC = () => {
       <IonContent fullscreen color="primary" >
       <IonItemDivider color="primary">Title</IonItemDivider>
           <IonItem>
-            <IonInput   value={title} placeholder="Enter Title" onIonChange={e => setTitle(e.detail.value!)}  id="titletxt"  clearInput></IonInput>
+            <IonInput   value={titleinp} placeholder="Enter Title" onIonChange={e => setTitle(e.detail.value!)}  id="titletxt"  clearInput></IonInput>
           </IonItem>
 
           <IonItemDivider color="primary">Description</IonItemDivider>
           <IonItem>
-            <IonInput  value={desc} placeholder="Enter Description" onIonChange={e => setDesc(e.detail.value!)}  id="desctxt" clearInput></IonInput>
+            <IonInput  value={descinp} placeholder="Enter Description" onIonChange={e => setDesc(e.detail.value!)}  id="desctxt" clearInput></IonInput>
           </IonItem>
 
           <IonItemDivider color="primary">Picture Url</IonItemDivider>
           <IonItem>
-            <IonInput value={url} placeholder="Enter Imageurl" onIonChange={e => seturl(e.detail.value!)}  id="urltxt"  clearInput></IonInput>
+            <IonInput value={urlinp} placeholder="Enter Imageurl" onIonChange={e => seturl(e.detail.value!)}  id="urltxt"  clearInput></IonInput>
           </IonItem>
 
-          
-            
+
+   
             <IonButton onClick={addCard} color="success"  >
             Add +
             </IonButton>
 
 
             <IonCol id="cards">
+            {
+            posts?.map( post => (
+      <IonCard key={post.title}>
 
+<IonHeader>
+      
+      <IonTitle>{post.title}</IonTitle>
+    </IonHeader>
+      <IonImg src={post.imgurl}></IonImg>
+      
+      <IonContent slot="" color="light">
+      {post.description}
+  </IonContent>
+  <IonCol>
+        <IonButton size="small">
+          
+          <IonIcon icon="list-box"/>
+          
+        </IonButton>
+      </IonCol>
+    </IonCard>
+    ))}
             </IonCol>
         
       </IonContent>
