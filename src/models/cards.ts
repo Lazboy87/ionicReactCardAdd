@@ -2,12 +2,16 @@
 
 interface cards {
 
-    id?:number;
-    title?:string;
-    description?: string;
-    imgurl?:string;
-    comments?:[];
-
+   
+   description:string,
+   id:number,
+   title:string,
+   url:string,
+   userid:string,
+   user:{
+       display_name:string,
+       
+   }
 
 };
 

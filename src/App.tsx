@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { NhostAuthProvider, NhostApolloProvider } from "react-nhost";
 import Home from './pages/Home';
 import Detail from './pages/Home';
 
@@ -25,6 +26,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App: React.FC = () => (
+ <NhostApolloProvider gqlEndpoint={'https://hasura-je5dyp0j.nhost.app/v1/graphql'}>
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -34,6 +36,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+  </NhostApolloProvider>
 );
 
 export default App;

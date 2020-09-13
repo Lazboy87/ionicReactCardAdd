@@ -1,17 +1,31 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg, IonLabel } from '@ionic/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cards from '../models/cards';
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
+import { idText } from 'typescript';
+import cardsList from '../models/cardsList';
 
-
-
+const GET_CARDS = gql`
+  query {
+    posts {
+      description
+      id
+      title
+      url
+      user_id
+      user {
+        display_name
+      }
+    }
+    
+  }
+`;
 
 
 const Home: React.FC = () => {
 
-  const [posts,setPost]=useState<cards[]>([]);
-
- 
   
 
   
@@ -22,34 +36,19 @@ const Home: React.FC = () => {
   
 
   
+   const {loading, data} = useQuery<cardsList>(GET_CARDS);
 
-   function addCard(){
-    console.log("im working");
-  
-
-   const card : cards = {
-     id:1,
-     title:titleinp,
-     description:descinp,
-     imgurl:urlinp,
-
-
-  }
-    
-    
-              
-       posts?.push(card);        
-           console.log(posts);
-       for (const post in posts){ console.log(post)}
-   
-    setTitle('');
-    setDesc('');
-    seturl('');
-    setcomment('');
-    
-   };
-
-
+   if (loading){
+     return <IonLabel>laster data </IonLabel>
+   }
+     
+     
+     
+     
+     if(data){
+     console.log(data)
+   }
+ 
 
   return (
     <IonPage color="primary">
@@ -59,7 +58,7 @@ const Home: React.FC = () => {
         
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen color="primary" >
+       <IonContent fullscreen color="primary" >
       <IonItemDivider color="primary">Title</IonItemDivider>
           <IonItem>
             <IonInput   value={titleinp} placeholder="Enter Title" onIonChange={e => setTitle(e.detail.value!)}  id="titletxt"  clearInput></IonInput>
@@ -82,7 +81,7 @@ const Home: React.FC = () => {
             </IonButton>
 
 
-            <IonCol id="cards">
+         <IonCol id="cards">
             {
             posts?.map( post => (
       <IonCard key={post.title}>
@@ -105,9 +104,9 @@ const Home: React.FC = () => {
       </IonCol>
     </IonCard>
     ))}
-            </IonCol>
+            </IonCol> 
         
-      </IonContent>
+      </IonContent> 
     </IonPage>
   );
 };
