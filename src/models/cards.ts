@@ -10,8 +10,8 @@ interface cards {
    userid:string,
    user:{
        display_name:string,
-       
-   }
+        },
+        
 
 };
 

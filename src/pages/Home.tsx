@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { idText } from 'typescript';
 import cardsList from '../models/cardsList';
+import PostCard from '../components/PostCard';
 
 const GET_CARDS = gql`
   query {
@@ -76,35 +77,28 @@ const Home: React.FC = () => {
 
 
    
-            <IonButton onClick={addCard} color="success"  >
+            <IonButton  color="success"  >
             Add +
             </IonButton>
 
 
-         <IonCol id="cards">
-            {
-            posts?.map( post => (
-      <IonCard key={post.title}>
+        {
+          data?.posts.map( post =>(
+            <Link style={{textDecoration :'none'}} key={post.id} to={{
+              pathname:'/Detail/${post.id}',
+              state:{
+                post
+              }
+            }}>
+            <PostCard {...post}/>
 
-<IonHeader>
-      
-      <IonTitle>{post.title}</IonTitle>
-    </IonHeader>
-      <IonImg src={post.imgurl}></IonImg>
-      
-      <IonContent slot="" color="light">
-      {post.description}
-  </IonContent>
-  <IonCol>
-        <IonButton size="small">
-          
-          <IonIcon icon="list-box"/>
-          
-        </IonButton>
-      </IonCol>
-    </IonCard>
-    ))}
-            </IonCol> 
+            </Link>
+
+
+
+          ))
+
+        }
         
       </IonContent> 
     </IonPage>
