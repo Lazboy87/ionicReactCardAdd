@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonToolbar, IonPage, IonHeader, IonTitle, IonContent, IonLabel, IonButtons, IonBackButton, IonCol, IonCard, IonItem, IonList } from "@ionic/react";
+import { IonToolbar, IonPage, IonHeader, IonTitle, IonContent, IonLabel, IonButtons, IonBackButton, IonCol, IonCard, IonItem, IonList, IonImg } from "@ionic/react";
 import PostCard from "../components/PostCard";
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
@@ -73,7 +73,7 @@ const Detail = (props: any) => {
             <IonItem key={comment.id}>
 
             <IonLabel>
-            
+           <img height="50px" width="50px" src={comment.user.avatar_url} />
           <h2>{comment.user.display_name} </h2>
               <p>{comment.comment}</p>
             </IonLabel>
