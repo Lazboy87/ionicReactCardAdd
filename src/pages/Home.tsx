@@ -1,12 +1,13 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg, IonLabel } from '@ionic/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import cards from '../models/cards';
+
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-import { idText } from 'typescript';
+
 import cardsList from '../models/cardsList';
 import PostCard from '../components/PostCard';
+
 
 const GET_CARDS = gql`
   query {
@@ -18,6 +19,17 @@ const GET_CARDS = gql`
       user_id
       user {
         display_name
+        avatar_url
+      }
+      comments {
+        comment
+        id
+        postsid
+        userId
+        user {
+          display_name
+          avatar_url
+        }
       }
     }
     
@@ -49,6 +61,7 @@ const Home: React.FC = () => {
      if(data){
      console.log(data)
    }
+   
  
 
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from "@ionic/react";
+import { IonCol,IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from "@ionic/react";
 import cards from "../models/cards";
 
-const PostCard = ({ id, title, description, url, user:{display_name} }: cards) => {
+const PostCard = ({ id, title, description, url, user:{display_name,avatar_url}}: cards) => {
 
   return (
     <IonCard>
@@ -17,7 +17,11 @@ const PostCard = ({ id, title, description, url, user:{display_name} }: cards) =
       </IonCardHeader>
       <IonCardContent>
         {description}
+    
+      
       </IonCardContent>
+      
+      
     </IonCard>
   )
 };

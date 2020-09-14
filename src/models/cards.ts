@@ -1,3 +1,5 @@
+import Icomments from "./Icomments";
+
 
 
 interface cards {
@@ -10,7 +12,11 @@ interface cards {
    userid:string,
    user:{
        display_name:string,
+       avatar_url:string,
         },
+        comments: [Icomments]
+        
+     
         
 
 };
