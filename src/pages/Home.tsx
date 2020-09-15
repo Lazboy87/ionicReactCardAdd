@@ -40,7 +40,7 @@ const GET_CARDS = gql`
 const Home: React.FC = () => {
 
   
-
+ 
   
   const [titleinp, setTitle] = useState<string>();
   const [descinp, setDesc] = useState<string>();
