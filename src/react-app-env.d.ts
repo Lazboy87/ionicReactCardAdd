@@ -2,3 +2,4 @@
 
 
 declare module 'react-nhost';
+
