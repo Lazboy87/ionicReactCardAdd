@@ -11,15 +11,7 @@ import cards from "../models/cards";
 
 
 
-  //   const GET_USER = gql`
-  //   query {
-  //     users(where: { id: { _eq: } }) {
-  //       id
-  //       display_name
-  //     }
-  //   }
-  //   }
-  // `;
+  
   
  
   
@@ -29,18 +21,7 @@ import cards from "../models/cards";
 
 const Detail = (props: any) => {
 
-  // const {loading, data} = useQuery<user>(GET_USER);
 
-  // if (loading){
-  //   return <IonLabel>laster data </IonLabel>
-  // }
-    
-    
-    
-    
-  //   if(data){
-  //   console.log(data)
-  // }
 
 
  

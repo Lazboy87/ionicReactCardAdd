@@ -19,15 +19,15 @@ const GET_CARDS = gql`
       user_id
       user {
         display_name
+        id
         avatar_url
       }
       comments {
         comment
         id
-        postsid
-        userId
         user {
           display_name
+          id
           avatar_url
         }
       }
