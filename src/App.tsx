@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Detail from './pages/Detail';
 import  {auth}  from "./utils/nhost";
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,12 +33,14 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 
+
 const App: React.FC = () => (
   <NhostAuthProvider auth={auth}>
  <NhostApolloProvider auth={auth} gqlEndpoint={'https://hasura-je5dyp0j.nhost.app/v1/graphql'}>
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
+      <Route path="/register" component={Register} exact={true} />
         <Route path="/login" component={Login} exact={true} />
         <Route path="/home" component={Home} exact={true} />
         <Route path="/detail/:id" component={Detail} exact={true} />

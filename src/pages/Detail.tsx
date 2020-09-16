@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { IonToolbar, IonPage, IonHeader, IonTitle, IonContent, IonLabel, IonButtons, IonBackButton, IonCol, IonCard, IonItem, IonList, IonImg } from "@ionic/react";
+import { IonToolbar, IonPage, IonHeader, IonTitle, IonContent, IonLabel, IonButtons, IonBackButton, IonCol, IonCard, IonItem, IonList, IonImg, useIonViewWillEnter, IonIcon } from "@ionic/react";
 import PostCard from "../components/PostCard";
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 
 
 import cards from "../models/cards";
-
+import { useHistory } from "react-router";
+import { auth } from "../utils/nhost";
 
 
 
@@ -20,7 +21,15 @@ import cards from "../models/cards";
 
 
 const Detail = (props: any) => {
-
+  
+  let history= useHistory();
+  useIonViewWillEnter(()=>{
+   
+    if(auth.isAuthenticated() == false){
+      history.replace("/login");
+    }
+    
+      })
 
 
 
@@ -30,8 +39,9 @@ const Detail = (props: any) => {
     return <div></div>
   }
  
+  
 
-
+ 
 
 
 
@@ -41,6 +51,9 @@ const Detail = (props: any) => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton></IonBackButton>
+          </IonButtons>
+          <IonButtons slot="end">
+        <IonIcon name="log-out"></IonIcon>
           </IonButtons>
           <IonTitle>Detail View!</IonTitle>
         </IonToolbar>

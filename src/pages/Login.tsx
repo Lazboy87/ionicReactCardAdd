@@ -38,19 +38,20 @@ const Login = () => {
         history.replace("/home");
       }
       
+      
         })
 
-const [authpass, setauth]=useState<boolean>();
+
 
     return (
-      <IonPage>
+      <IonPage color="light">
         <IonHeader>    
         <IonToolbar>
 
         </IonToolbar>
-        <IonTitle> Login </IonTitle>
+       
         </IonHeader> 
-
+        <IonTitle> Login </IonTitle>
         <IonContent>
           <IonCard>
          <IonList>
@@ -69,9 +70,11 @@ const [authpass, setauth]=useState<boolean>();
             Login
           </IonButton>
 
+          <Link to={{pathname:"/register"}}>
           <IonButton color="success" >
             Register User
           </IonButton>
+          </Link>
          </IonList>
 
 

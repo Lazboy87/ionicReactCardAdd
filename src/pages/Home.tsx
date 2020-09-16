@@ -1,12 +1,13 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons,IonCard, IonItemDivider, IonItem, IonInput, IonCol, IonIcon, generateId, IonImg, IonLabel, useIonViewWillEnter, IonBackButton } from '@ionic/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-
+import { useHistory } from "react-router-dom";
 import cardsList from '../models/cardsList';
 import PostCard from '../components/PostCard';
+import { auth } from '../utils/nhost';
 
 
 const GET_CARDS = gql`
@@ -39,8 +40,27 @@ const GET_CARDS = gql`
 
 const Home: React.FC = () => {
 
-  
- 
+
+  const logOutUser = async () =>{
+    try{
+      await auth.logout();
+      history.replace('/login');
+    }
+    catch(e){
+
+    }
+    
+    
+  }
+
+  let history= useHistory();
+  useIonViewWillEnter(()=>{
+    
+    if(!auth.isAuthenticated()){
+      history.replace("/login");
+    }
+    
+      })
   
   const [titleinp, setTitle] = useState<string>();
   const [descinp, setDesc] = useState<string>();
@@ -65,9 +85,12 @@ const Home: React.FC = () => {
  
 
   return (
-    <IonPage color="primary">
+    <IonPage color="light">
       <IonHeader color="primary">
         <IonToolbar color="primary">
+        <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
           <IonTitle>Card Add</IonTitle >
         
         </IonToolbar>
@@ -92,6 +115,10 @@ const Home: React.FC = () => {
    
             <IonButton  color="success"  >
             Add +
+            </IonButton>
+
+            <IonButton onClick={logOutUser} color="success"  >
+            Logout
             </IonButton>
 
 
